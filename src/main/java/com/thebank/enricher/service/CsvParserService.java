@@ -15,5 +15,12 @@ public interface CsvParserService {
 
     Observable<Collection<CsvProduct>> parseProducts(Reader productsReader);
 
+    /**
+     * A non-typed version of parsing many dtos into single String
+     * @param dtos dtos that will be parsed to CSV
+     * @return CSV content as a String
+     * @throws CsvDataTypeMismatchException
+     * @throws CsvRequiredFieldEmptyException
+     */
     String parseToCsvString(Collection dtos) throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException;
 }

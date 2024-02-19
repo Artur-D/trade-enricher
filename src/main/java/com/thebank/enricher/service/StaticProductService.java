@@ -28,8 +28,6 @@ class StaticProductService implements ProductService {
     @PostConstruct
     private void loadProducts() {
         try (InputStreamReader reader = new InputStreamReader(productsCsvResource.getInputStream())) {
-//            Observable<Collection<CsvProduct>> parsedProducts = csvParserService.parseProducts(reader);
-
             csvParserService.parseProducts(reader)
                     .subscribe(
                             products -> {
@@ -51,6 +49,11 @@ class StaticProductService implements ProductService {
         return Observable.just(productIdToProduct);
     }
 
+    /**
+     * Provides product name by productId
+     * @param productId
+     * @return productName OR NULL if the product has not been found
+     */
     @Override
     public String provideProductNameById(Long productId) {
         CsvProduct csvProduct = productIdToProduct.get(productId);
